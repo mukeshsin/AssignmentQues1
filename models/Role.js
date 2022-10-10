@@ -16,8 +16,8 @@ const Role = db.define('roles', {
     type: DataTypes.STRING
   }
 },{
-  // Freeze Table Name
-  freezeTableName: true
+  //  Table Name
+  tableName:"roles",
 });
 
 // Export model Product
