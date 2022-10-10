@@ -6,14 +6,14 @@ import cors from "cors";
 import db from "./config/database.js";
 // Import router
 import Router from "./routes/routes.js";
- 
+
 // Init express
 const app = express();
 // use express json
 app.use(express.json());
 // use cors
 app.use(cors());
- 
+
 
 
 // Testing database connection 
@@ -23,10 +23,9 @@ try {
 } catch (error) {
     console.error('500 errors:', error);
 }
- 
+
 // use router
 app.use(Router);
- 
+
 // listen on port
-app.listen(5000, () => console.log('Server running at http://localhost:5000'));
- 
+app.listen(8080, () => console.log('Server running at http://localhost:8080'));
