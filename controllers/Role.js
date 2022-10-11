@@ -20,7 +20,7 @@ export const getRoles = async (req, res) => {
 export const getRoleById = async (req, res) => {
     const id = req.params.id;
 
-  Role.findByid(id)
+  Role.getRoleById(id)
     .then(data => {
       if (data) {
         res.send(data);
@@ -38,27 +38,38 @@ export const getRoleById = async (req, res) => {
 };
 
 
+// Create a new role
+export const createRole = async (req, res) => {
+  // Validate request
+ if (!req.body) {
+  res.status(400).send({
+    message: "Content can not be empty!"
+  });
+  return;
+}
+
+// Create a Role
+const role = {
+  name: req.body.name,
+  description: req.body.description,
+};
+
+// Save Role 
+Role.create(role)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "500 errors to the user"
+    });
+  });
+};
 
 
 
 
-
-
-
-
-
-
- // Create a new role
- export const createRole = async (req, res) => {
-        try {
-            await Role.create(req.body);
-            res.json({
-                "message": "Product Created"
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
 
 //  Update role by id
