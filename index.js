@@ -6,7 +6,7 @@ import cors from "cors";
 import db from "./config/db.config.js";
 // Import router
 import Router from "./routes/routes.js";
- //await db.sync({ force: true });
+//await db.sync({ force: true });
 // Init express
 const app = express();
 // use express json
@@ -29,5 +29,5 @@ try {
 app.use(Router);
 
 // listen on port
-app.listen(7000, () => console.log('Server running at http://localhost:7000'));
+app.listen(3000, () => console.log('Server running at http://localhost:3000'));
 

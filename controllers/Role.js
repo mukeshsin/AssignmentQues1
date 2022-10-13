@@ -2,25 +2,24 @@
 import db from "../config/db.config.js";
 import Role from "../models/Role.js";
 
- // Get all Role
+// Get all Role
 export const getRoles = async (req, res) => {
-    const name = req.query.name;
-    const description=req.query.description;
-    Role.findAll({} )
-      .then(data => {
-        res.send(data);
-      })
-       .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "500 errors to the user"
-        });
+
+  Role.findAll({})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "500 errors to the user"
       });
-  };
+    });
+};
 // Get role by id
 export const getRoleById = async (req, res) => {
   const id = req.params.id;
-     Role.findByPk(id)
+  Role.findByPk(id)
     .then(data => {
       if (data) {
         res.send(data);
@@ -38,9 +37,10 @@ export const getRoleById = async (req, res) => {
 };
 export const createRole = async (req, res) => {
   // Validate request
-  if (!req.body) {
-    res.status(200).send({
-      message: "Content can not be empty!"
+  if (!req.body.name) 
+  if (!req.body.description){
+    res.status(400).send({
+      message: "500 error to the user"
     });
     return;
   }
@@ -62,7 +62,7 @@ export const createRole = async (req, res) => {
           err.message || "500 error to the user to create new role."
       });
     });
-  };
+};
 
 
 
@@ -71,51 +71,43 @@ export const createRole = async (req, res) => {
 //  Update role by id
 export const updateRole = async (req, res) => {
 
-    const id= req.params.id;
-    Role.update(req.body, {
-        where: { id: id }
-      })
-        .then(num => {
-          if (num == 1) {
-            res.send({
-              message: "Role was updated successfully."
-            });
-          } else {
-            res.send({
-              message: `Cannot update Role with id=${id}.`
-            });
-          }
-        })
-        .catch(err => {
-          res.status(500).send({
-            message: "Error updating Role with id=" + id
-          });
+  const id = req.params.id;
+  Role.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Role was updated successfully."
         });
-    };
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "500 error to the user"
+      });
+    });
+};
 
 //  Delete role by id
- export const deleteRole = async (req, res) => {
+export const deleteRole = async (req, res) => {
   const id = req.params.id;
-    Role.destroy({
-        where: {id:id},
-    
-      })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "Role was deleted successfully."
-          });
-        } else {
-          res.send({
-            message: `Cannot deleted Role with id=${id}.`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error delete Role with id=" + id
+  Role.destroy({
+    where: { id: id },
+
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Role was deleted successfully."
         });
+     }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "500 error to the user"
       });
-  };
+    });
+};
 
 

@@ -18,7 +18,6 @@ id:{
 },
    name: {
     type: DataTypes.STRING,
-    allowNull:false,
     unique: true,
     validation:{
      message:"name has already used"
